@@ -1,0 +1,1319 @@
+﻿<Assets>
+
+	<Shader Id="GaugeInstancedVert" Path="Shaders/GaugeInstanced.vert"/>
+	<Shader Id="GaugeVert" Path="Shaders/Gauge.vert"/>
+	<Shader Id="GaugeDigit" Path="Shaders/GaugeDigit.frag"/>
+	<Shader Id="GaugeColor" Path="Shaders/GaugeColor.frag"/>
+	<Shader Id="GaugeScrew" Path="Shaders/GaugeScrew.frag"/>
+	<Shader Id="GaugeLabel" Path="Shaders/GaugeLabel.frag"/>
+	<Shader Id="GaugeRotVert" Path="Shaders/GaugeRotating.vert"/>
+	<Shader Id="GaugeButtonLed" Path="Shaders/GaugeButtonLed.frag"/>
+	<Shader Id="GaugeButtonFace" Path="Shaders/GaugeButtonFace.frag"/>
+	
+	<GaugeCanvas Id="RendezvousControl">
+		<DisplayName Value="Rendezvous Control"/>
+		<AnchorUv X="1" Y="1" />
+		<PivotUv X="1" Y="1" />
+		<OffsetUv X="-0.01" Y="-0.138" />
+		<SizeUv X="0.23" Y="0.0844" Locked="true" />
+		<Component Name="Back">
+			<AnchorUv X="0" Y="0" />
+			<PivotUv X="0" Y="0" />
+			<OffsetUv X="0" Y="0" />
+			<SizeUv X="1" Y="1" />
+			<Fragment Id="GaugeColor" />
+			<Vertex Id="GaugeInstancedVert" />
+			<Box X="0" Y="0" Width="1" Height="1">
+				<Color R="0.07" G="0.07" B="0.07" />
+				<Rounding Value="0.15" />
+			</Box>
+		</Component>
+		<Component Name="Screws">
+			<AnchorUv X="0" Y="0" />
+			<PivotUv X="0" Y="0" />
+			<OffsetUv X="0" Y="0" />
+			<SizeUv X="1" Y="1" />
+			<Fragment Id="GaugeScrew" />
+			<Vertex Id="GaugeInstancedVert" />
+			<Rect X="0.015" Y="0.04" Width="0.03" Height="0.09" />
+			<Rect X="0.015" Y="0.87" Width="0.03" Height="0.09" />
+			<Rect X="0.956" Y="0.87" Width="0.03" Height="0.09" />
+			<Rect X="0.956" Y="0.04" Width="0.03" Height="0.09" />
+		</Component>
+		<Component Name="Labels">
+			<AnchorUv X="0" Y="0" />
+			<PivotUv X="0" Y="0" />
+			<OffsetUv X="0" Y="0" />
+			<SizeUv X="1" Y="1" />
+			<Fragment Id="GaugeLabel" />
+			<Vertex Id="GaugeInstancedVert" />
+			<Label X="0.164" Y="0.07" Width="0.1478" Height="0.0942" TextColor="White" BackColor="DarkGrey" TextScale="0.9" Label="TARGET" />
+			<Label X="0.554" Y="0.093" Width="0.3109" Height="0.0742" TextColor="White" BackColor="DarkGrey" TextScale="0.9" Label="CLOSEST APPROACH" />
+			<Label X="0.635" Y="0.465" Width="0.1424" Height="0.0742" TextColor="White" BackColor="DarkGrey" TextScale="0.9" Label="RELATIVE" />
+			<Label X="0.490" Y="0.590" Width="0.1108" Height="0.0575" TextColor="White" BackColor="DarkGrey" TextScale="0.9" Label="VELOCITY" />
+			<Label X="0.786" Y="0.590" Width="0.1111" Height="0.0575" TextColor="White" BackColor="DarkGrey" TextScale="0.9" Label="DISTANCE" />
+			<Label X="0.527" Y="0.79" Width="0.02" Height="0.058" TextColor="White" BackColor="DarkGrey" TextScale="1" Label="." />
+			<Label X="0.854" Y="0.79" Width="0.02" Height="0.058" TextColor="White" BackColor="DarkGrey" TextScale="1" Label="." />
+			<Label X="0.854" Y="0.305" Width="0.02" Height="0.058" TextColor="White" BackColor="DarkGrey" TextScale="1" Label="." />
+		</Component>
+		<Component Name="Buttons">
+			<AnchorUv X="0" Y="0" />
+			<PivotUv X="0" Y="0" />
+			<OffsetUv X="0.015" Y="0.21" />
+			<SizeUv X="0.4031" Y="0.729" />
+			<Fragment Id="GaugeButtonFace" />
+			<Vertex Id="GaugeInstancedVert" />
+			<Button X="0" Y="0" Width="0.51" Height="0.333" TextColor="Black" BackColor="DarkGrey" TextScale="0.34" Label="TOWARD" ForeColor="Green">
+				<Tooltip Value="Ориентация «Цель вперед». Нос аппарата направлен на цель. Ось «вверх» направлена от поверхности." />
+				<FlightComputer Action="FlightComputerAttitudeTrackTarget" Value="Toward" Toggle="false" />
+			</Button>
+			<Button X="0.49" Y="0" Width="0.51" Height="0.333" TextColor="Black" BackColor="DarkGrey" TextScale="0.34" Label="ANTIVEL" ForeColor="Green">
+				<Tooltip Value="Ориентация «Анти-скорость на цель». Нос аппарата направлен против вектора относительной скорости к цели. Ось «вверх» направлена в сторону, противоположную «верху» цели." />
+				<FlightComputer Action="FlightComputerAttitudeTrackTarget" Value="Antivel" Toggle="false" />
+			</Button>
+			<Button X="0" Y="0.333" Width="0.51" Height="0.333" TextColor="Black" BackColor="DarkGrey" TextScale="0.34" Label="AWAY" ForeColor="Green">
+				<Tooltip Value="Ориентация «От цели». Нос аппарата направлен от цели. Ось «вверх» направлена в сторону поверхности." />
+				<FlightComputer Action="FlightComputerAttitudeTrackTarget" Value="Away" Toggle="false" />
+			</Button>
+			<Button X="0.49" Y="0.333" Width="0.51" Height="0.333" TextColor="Black" BackColor="DarkGrey" TextScale="0.34" Label="ALIGN" ForeColor="Green">
+				<Tooltip Value="Ориентация «Выравнивание с целью». Совмещает ориентацию аппарата с ориентацией цели." />
+				<FlightComputer Action="FlightComputerAttitudeTrackTarget" Value="Align" Toggle="false" />
+			</Button>
+			<Button X="0.255" Y="0.666" Width="0.51" Height="0.333" TextColor="Black" BackColor="DarkGrey" TextScale="0.34" Label="NUL ROT" ForeColor="Green">
+				<Tooltip Value="Остановить вращение в системе отсчёта ЦЕЛЬ. ПРИМЕЧАНИЕ: РСУ сама по себе не может полностью компенсировать все вращения." />
+				<FlightComputer Action="VehicleReferenceFrame" Value="Dock" Toggle="false" />
+			</Button>
+		</Component>
+		<Component Name="ClosestApproachTimeDigits">
+			<AnchorUv X="0" Y="0" />
+			<PivotUv X="0.5" Y="0" />
+			<OffsetUv X="0.540" Y="0.21" />
+			<SizeUv X="0.2079" Y="0.158" />
+			<Tooltip Value="Время до ближайшего сближения с целью." />
+			<Fragment Id="GaugeDigit" />
+			<Vertex Id="GaugeInstancedVert" />
+			<Digit X="0" Y="0" Width="0.18" Height="1" TextColor="White" BackColor="DarkGrey" TextScale="0.68">
+				<Value Bind="TgtClosestTime" Index="0" />
+			</Digit>
+			<Digit X="0.18" Y="0" Width="0.18" Height="1" TextColor="White" BackColor="DarkGrey" TextScale="0.68">
+				<Value Bind="TgtClosestTime" Index="1" />
+			</Digit>
+			<Digit X="0.36" Y="0" Width="0.18" Height="1" TextColor="White" BackColor="DarkGrey" TextScale="0.68">
+				<Value Bind="TgtClosestTime" Index="2" />
+			</Digit>
+			<Digit X="0.54" Y="0" Width="0.46" Height="1" TextColor="DarkGrey" BackColor="White" TextScale="0.68">
+				<TimeUnit Bind="TgtClosestTime" Index="3" />
+			</Digit>
+		</Component>
+		<Component Name="ClosestApproachDistanceDigits">
+			<AnchorUv X="0" Y="0" />
+			<PivotUv X="0.5" Y="0" />
+			<OffsetUv X="0.830" Y="0.210" />
+			<SizeUv X="0.290" Y="0.158" />
+			<Tooltip Value="Расстояние до цели в момент ближайшего сближения." />
+			<Fragment Id="GaugeDigit" />
+			<Vertex Id="GaugeInstancedVert" />
+			<Digit X="0" Y="0" Width="0.12" Height="1" TextColor="White" BackColor="DarkGrey" TextScale="0.68">
+				<Value Bind="TgtClosestDistance" Index="0" />
+			</Digit>
+			<Digit X="0.12" Y="0" Width="0.12" Height="1" TextColor="White" BackColor="DarkGrey" TextScale="0.68">
+				<Value Bind="TgtClosestDistance" Index="1" />
+			</Digit>
+			<Digit X="0.24" Y="0" Width="0.12" Height="1" TextColor="White" BackColor="DarkGrey" TextScale="0.68">
+				<Value Bind="TgtClosestDistance" Index="2" />
+			</Digit>
+			<Digit X="0.36" Y="0" Width="0.12" Height="1" TextColor="White" BackColor="DarkGrey" TextScale="0.68">
+				<Value Bind="TgtClosestDistance" Index="3" />
+			</Digit>
+			<Digit X="0.48" Y="0" Width="0.12" Height="1" TextColor="White" BackColor="DarkGrey" TextScale="0.68">
+				<Value Bind="TgtClosestDistance" Index="4" />
+			</Digit>
+			<Digit X="0.63" Y="0" Width="0.12" Height="1" TextColor="White" BackColor="DarkGrey" TextScale="0.68">
+				<Value Bind="TgtClosestDistance" Index="5" />
+			</Digit>
+			<Digit X="0.75" Y="0" Z="1" W="1" TextColor="DarkGrey" BackColor="White" TextScale="0.68">
+				<DistanceUnit Bind="TgtClosestDistance" Index="6" />
+			</Digit>
+		</Component>
+		<Component Name="RelativeVelocityDigits">
+			<AnchorUv X="0" Y="0" />
+			<PivotUv X="0.5" Y="0" />
+			<OffsetUv X="0.540" Y="0.690" />
+			<SizeUv X="0.2234" Y="0.158" />
+			<Tooltip Value="Текущая относительная скорость цели." />
+			<Fragment Id="GaugeDigit" />
+			<Vertex Id="GaugeInstancedVert" />
+			<Digit X="0" Y="0" Width="0.154" Height="1" TextColor="White" BackColor="DarkGrey" TextScale="0.68">
+				<Value Bind="TgtRelVelocity" Index="0" />
+			</Digit>
+			<Digit X="0.154" Y="0" Width="0.154" Height="1" TextColor="White" BackColor="DarkGrey" TextScale="0.68">
+				<Value Bind="TgtRelVelocity" Index="1" />
+			</Digit>
+			<Digit X="0.308" Y="0" Width="0.154" Height="1" TextColor="White" BackColor="DarkGrey" TextScale="0.68">
+				<Value Bind="TgtRelVelocity" Index="2" />
+			</Digit>
+			<Digit X="0.515" Y="0" Width="0.154" Height="1" TextColor="White" BackColor="DarkGrey" TextScale="0.68">
+				<Value Bind="TgtRelVelocity" Index="3" />
+			</Digit>
+			<Digit X="0.669" Y="0" Width="0.331" Height="1" TextColor="DarkGrey" BackColor="White" TextScale="0.68">
+				<DistanceUnit Bind="TgtRelVelocity" Index="4" />
+			</Digit>
+		</Component>
+		<Component Name="RelativeDistanceDigits">
+			<AnchorUv X="0" Y="0" />
+			<PivotUv X="0.5" Y="0" />
+			<OffsetUv X="0.830" Y="0.690" />
+			<SizeUv X="0.290" Y="0.158" />
+			<Tooltip Value="Текущее относительное расстояние до цели." />
+			<Fragment Id="GaugeDigit" />
+			<Vertex Id="GaugeInstancedVert" />
+			<Digit X="0" Y="0" Width="0.12" Height="1" TextColor="White" BackColor="DarkGrey" TextScale="0.68">
+				<Value Bind="TgtRelDistance" Index="0" />
+			</Digit>
+			<Digit X="0.12" Y="0" Width="0.12" Height="1" TextColor="White" BackColor="DarkGrey" TextScale="0.68">
+				<Value Bind="TgtRelDistance" Index="1" />
+			</Digit>
+			<Digit X="0.24" Y="0" Width="0.12" Height="1" TextColor="White" BackColor="DarkGrey" TextScale="0.68">
+				<Value Bind="TgtRelDistance" Index="2" />
+			</Digit>
+			<Digit X="0.36" Y="0" Width="0.12" Height="1" TextColor="White" BackColor="DarkGrey" TextScale="0.68">
+				<Value Bind="TgtRelDistance" Index="3" />
+			</Digit>
+			<Digit X="0.48" Y="0" Width="0.12" Height="1" TextColor="White" BackColor="DarkGrey" TextScale="0.68">
+				<Value Bind="TgtRelDistance" Index="4" />
+			</Digit>
+			<Digit X="0.63" Y="0" Width="0.12" Height="1" TextColor="White" BackColor="DarkGrey" TextScale="0.68">
+				<Value Bind="TgtRelDistance" Index="5" />
+			</Digit>
+			<Digit X="0.75" Y="0" Z="1" W="1" TextColor="DarkGrey" BackColor="White" TextScale="0.68">
+				<DistanceUnit Bind="TgtRelDistance" Index="6" />
+			</Digit>
+		</Component>
+	</GaugeCanvas>
+	
+	<GaugeCanvas Id="BurnControl">
+		<DisplayName Value="Burn Control"/>
+		<AnchorUv X="1" Y="1" />
+		<PivotUv X="1" Y="1" />
+		<OffsetUv X="-0.01" Y="-0.226" />
+		<SizeUv X="0.1636" Y="0.1082" Locked="true" />
+		<Component Name="Back">
+			<AnchorUv X="0" Y="0" />
+			<PivotUv X="0" Y="0" />
+			<OffsetUv X="0" Y="0" />
+			<SizeUv X="1.0" Y="1.0" />
+			<Vertex Id="GaugeInstancedVert"/>
+			<Fragment Id="GaugeColor"/>
+			<Box X="0" Y="0" Z="1" W="1">
+				<Color R="0.07" G="0.07" B="0.07" />
+				<Rounding Value="0.15"/>
+			</Box>
+		</Component>
+		<Component Name="Screws">
+			<AnchorUv X="0" Y="0" />
+			<PivotUv X="0" Y="0" />
+			<OffsetUv X="0" Y="0" />
+			<SizeUv X="1.0" Y="1.0" />
+			<Vertex Id="GaugeInstancedVert"/>
+			<Fragment Id="GaugeScrew"/>
+			<Rect X="0.022" Y="0.030" Width="0.039" Height="0.061"/>
+			<Rect X="0.945" Y="0.915" Width="0.039" Height="0.061"/>
+			<Rect X="0.022" Y="0.915" Width="0.039" Height="0.061"/>
+			<Rect X="0.945" Y="0.030" Width="0.039" Height="0.061"/>
+		</Component>
+		<Component Name="Labels">
+			<AnchorUv X="0" Y="0" />
+			<PivotUv X="0" Y="0" />
+			<OffsetUv X="0" Y="0" />
+			<SizeUv X="1" Y="1" />
+			<Vertex Id="GaugeInstancedVert"/>
+			<Fragment Id="GaugeLabel"/>
+			<Label X="0.106" Y="0.145" Width="0.1354" Height="0.0733" Label="BURN" TextScale="0.9"/>
+			<Label X="0.716" Y="0.145" Width="0.2396" Height="0.0733" Label="CONTROL" TextScale="0.9"/>
+			<Label X="0.344" Y="0.047" Width="0.3093" Height="0.0579" Label="TIME TO MARK" TextScale="0.9"/>
+			<Label X="0.344" Y="0.290" Width="0.3093" Height="0.0579" Label="START BURN IN" TextScale="0.9"/>
+			<Label X="0.344" Y="0.531" Width="0.3093" Height="0.0579" Label="BURN TIME" TextScale="0.9"/>
+			<Label X="0.344" Y="0.773" Width="0.3093" Height="0.0579" Label="DELTAV" TextScale="0.9"/>
+		</Component>
+		<Component Name="Buttons">
+			<Vertex Id="GaugeInstancedVert"/>
+			<Fragment Id="GaugeButtonFace"/>
+			<AnchorUv X="0" Y="0" />
+			<PivotUv X="0" Y="0" />
+			<OffsetUv X="0" Y="0" />
+			<SizeUv X="1.0" Y="1.0" />
+			
+			<!-- COLUMN BURN -->
+			<Button X="0.031" Y="0.270" Width="0.282" Height="0.185" Label="AUTO" ForeColor="Green" TextColor="Black" TextScale="0.34">
+				<FlightComputer Action="FlightComputerBurnMode" Value="Auto" Toggle="true"/>
+				<Tooltip Value="Активирует автоматическое выполнение запланированного манёвра бортовым компьютером."/>
+			</Button>
+			<Button X="0.031" Y="0.455" Width="0.282" Height="0.185" Label="WARP" ForeColor="Green" TextColor="Black" TextScale="0.34">
+				<FlightComputer Action="FlightComputerAction" Value="WarpToNextBurn" Toggle="true"/>
+				<Tooltip Value="Варп к времени следующего манёвра."/>
+			</Button>
+			<Button X="0.031" Y="0.641" Width="0.282" Height="0.185" Label="DELETE" ForeColor="Green" TextColor="Black" TextScale="0.34">
+				<FlightComputer Action="FlightComputerAction" Value="DeleteNextBurn"/>
+				<Tooltip Value="Удалить запланированный манёвр."/>
+			</Button>
+
+			<!-- COLUMN CONTROL -->
+			<Button X="0.679" Y="0.270" Width="0.282" Height="0.185" Label="POS" TextColor="Black" TextScale="0.34">
+				<FlightComputer Action="FlightComputerAttitudeTrackTarget" Value="PositiveDv"/>
+				<Tooltip Value="Положительная дельта скорости. Нос аппарата направлен в сторону тяги. Ось «вверх» направлена за пределы плоскости орбиты."/>
+			</Button>
+			<Button X="0.679" Y="0.455" Width="0.282" Height="0.185" Label="NEG" TextColor="Black" TextScale="0.34">
+				<FlightComputer Action="FlightComputerAttitudeTrackTarget" Value="NegativeDv"/>
+				<Tooltip Value="Отрицательная дельта скорости. Нос аппарата направлен против тяги. Ось «вверх» направлена внутрь плоскости орбиты."/>
+			</Button>
+			<Button X="0.679" Y="0.641" Width="0.282" Height="0.185" Label="NUL ROT" TextColor="Black" TextScale="0.34">
+				<FlightComputer Action="VehicleReferenceFrame" Value="BurnBody"/>
+				<Tooltip Value="Остановить (обнулить) вращение в системе отсчёта BURN(МАНЁВР). ПРИМЕЧАНИЕ: РСУ сама по себе не может полностью компенсировать все вращения."/>
+			</Button>
+		</Component>
+
+		<Component Name="TimeToMarkDigits">
+			<AnchorUv X="0" Y="0" Locked="false" />
+			<PivotUv X="0.5" Y="0.0" Locked="false" />
+			<OffsetUv X="0.495" Y="0.115" Locked="false" />
+			<SizeUv X="0.266" Y="0.120" Locked="false" />
+			<Vertex Id="GaugeInstancedVert"/>
+			<Fragment Id="GaugeDigit"/>
+			<Tooltip Value="Время до расчётной отметки манёвра, соответствующей требуемой середине включения двигателей."/>
+			<Digit X="0.0" Y="0.0" Width="0.18" Height="1.0" TextColor="White" BackColor="DarkGrey" TextScale="0.68">
+				<Value Bind="TimeToBurn" Index="0" />
+			</Digit>
+			<Digit X="0.18" Y="0.0" Width="0.18" Height="1.0" TextColor="White" BackColor="DarkGrey" TextScale="0.68">
+				<Value Bind="TimeToBurn" Index="1" />
+			</Digit>
+			<Digit X="0.36" Y="0.0" Width="0.18" Height="1.0" TextColor="White" BackColor="DarkGrey" TextScale="0.68">
+				<Value Bind="TimeToBurn" Index="2" />
+			</Digit>
+			<Digit X="0.54" Y="0.0" Width="0.46" Height="1.0" TextColor="DarkGrey" BackColor="White" TextScale="0.68">
+				<TimeUnit Bind="TimeToBurn" Index="3" />
+			</Digit>
+		</Component>
+		
+		<Component Name="StartBurnInDigits">
+			<AnchorUv X="0" Y="0" Locked="false" />
+			<PivotUv X="0.5" Y="0.0" Locked="false" />
+			<OffsetUv X="0.495" Y="0.36" Locked="false" />
+			<SizeUv X="0.266" Y="0.120" Locked="false" />
+			<Vertex Id="GaugeInstancedVert"/>
+			<Fragment Id="GaugeDigit"/>
+			<Tooltip Value="Время начала манёвра."/>
+			<Digit X="0.0" Y="0.0" Width="0.18" Height="1.0" TextColor="White" BackColor="DarkGrey" TextScale="0.68">
+				<Value Bind="StartBurnIn" Index="0" />
+			</Digit>
+			<Digit X="0.18" Y="0.0" Width="0.18" Height="1.0" TextColor="White" BackColor="DarkGrey" TextScale="0.68">
+				<Value Bind="StartBurnIn" Index="1" />
+			</Digit>
+			<Digit X="0.36" Y="0.0" Width="0.18" Height="1.0" TextColor="White" BackColor="DarkGrey" TextScale="0.68">
+				<Value Bind="StartBurnIn" Index="2" />
+			</Digit>
+			<Digit X="0.54" Y="0.0" Width="0.46" Height="1.0" TextColor="DarkGrey" BackColor="White" TextScale="0.68">
+				<TimeUnit Bind="StartBurnIn" Index="3" />
+			</Digit>
+		</Component>
+		
+		<Component Name="BurnTimeDigits">
+			<AnchorUv X="0" Y="0" Locked="false" />
+			<PivotUv X="0.5" Y="0.0" Locked="false" />
+			<OffsetUv X="0.495" Y="0.605" Locked="false" />
+			<SizeUv X="0.266" Y="0.120" Locked="false" />
+			<Vertex Id="GaugeInstancedVert"/>
+			<Fragment Id="GaugeDigit"/>
+			<Tooltip Value="Продолжительность запланированного манёвра."/>
+			<Digit X="0.0" Y="0.0" Width="0.18" Height="1.0" TextColor="White" BackColor="DarkGrey" TextScale="0.68">
+				<Value Bind="BurnTime" Index="0" />
+			</Digit>
+			<Digit X="0.18" Y="0.0" Width="0.18" Height="1.0" TextColor="White" BackColor="DarkGrey" TextScale="0.68">
+				<Value Bind="BurnTime" Index="1" />
+			</Digit>
+			<Digit X="0.36" Y="0.0" Width="0.18" Height="1.0" TextColor="White" BackColor="DarkGrey" TextScale="0.68">
+				<Value Bind="BurnTime" Index="2" />
+			</Digit>
+			<Digit X="0.54" Y="0.0" Width="0.46" Height="1.0" TextColor="DarkGrey" BackColor="White" TextScale="0.68">
+				<TimeUnit Bind="BurnTime" Index="3" />
+			</Digit>
+		</Component>
+		<Component Name="DeltaVDigits">
+			<AnchorUv X="0" Y="0" Locked="false" />
+			<PivotUv X="0.5" Y="0.0" Locked="false" />
+			<OffsetUv X="0.495" Y="0.85" Locked="false" />
+			<SizeUv X="0.245" Y="0.120" Locked="false" />
+			<Vertex Id="GaugeInstancedVert"/>
+			<Fragment Id="GaugeDigit"/>
+			<Tooltip Value="Общее Дельта-v запланированного манёвра, м/с."/>
+			<Digit X="0.0" Y="0.0" Width="0.2" Height="1.0" TextColor="White" BackColor="DarkGrey" TextScale="0.68">
+				<Value Bind="BurnDeltaV" Index="0" />
+			</Digit>
+			<Digit X="0.2" Y="0.0" Width="0.2" Height="1.0" TextColor="White" BackColor="DarkGrey" TextScale="0.68">
+				<Value Bind="BurnDeltaV" Index="1" />
+			</Digit>
+			<Digit X="0.4" Y="0.0" Width="0.2" Height="1.0" TextColor="White" BackColor="DarkGrey" TextScale="0.68">
+				<Value Bind="BurnDeltaV" Index="2" />
+			</Digit>
+			<Digit X="0.6" Y="0.0" Width="0.2" Height="1.0" TextColor="White" BackColor="DarkGrey" TextScale="0.68">
+				<Value Bind="BurnDeltaV" Index="3" />
+			</Digit>
+			<Digit X="0.8" Y="0.0" Width="0.2" Height="1.0" TextColor="White" BackColor="DarkGrey" TextScale="0.68">
+				<Value Bind="BurnDeltaV" Index="4" />
+			</Digit>
+		</Component>
+	</GaugeCanvas>
+
+	<GaugeCanvas Id="EngineControl">
+		<DisplayName Value="Engine Control"/>
+		<AnchorUv X="0.5" Y="1" Locked="true" />
+		<PivotUv X="0.5" Y="1" Locked="true" />
+		<OffsetUv X="0.0" Y="-0.01" />
+		<SizeUv X="0.1566" Y="0.0593" Locked="true" />
+		<Component Name="Back">
+			<AnchorUv X="0" Y="0" Locked="false" />
+			<PivotUv X="0" Y="0" Locked="false" />
+			<OffsetUv X="0" Y="0" Locked="false" />
+			<SizeUv X="1" Y="1" Locked="false" />
+			<Fragment Id="GaugeColor" />
+			<Vertex Id="GaugeInstancedVert" />
+			<Box X="0" Y="0" Z="1" W="1">
+				<Color R="0.07" G="0.07" B="0.07" />
+				<Rounding Value="0.25" />
+			</Box>
+		</Component>
+		<Component Name="Screws">
+			<AnchorUv X="0" Y="0" />
+			<PivotUv X="0" Y="0" />
+			<OffsetUv X="0" Y="0" />
+			<SizeUv X="1.0" Y="1.0" />
+			<Vertex Id="GaugeInstancedVert"/>
+			<Fragment Id="GaugeScrew"/>
+			<Rect X="0.012" Y="0.030" Width="0.042" Height="0.111"/>
+			<Rect X="0.950" Y="0.860" Width="0.042" Height="0.111"/>
+			<Rect X="0.012" Y="0.860" Width="0.042" Height="0.111"/>
+			<Rect X="0.950" Y="0.030" Width="0.042" Height="0.111"/>
+		</Component>
+		<Component Name="Labels">
+			<AnchorUv X="0" Y="0" Locked="false" />
+			<PivotUv X="0" Y="0" Locked="false" />
+			<OffsetUv X="0" Y="0" Locked="false" />
+			<SizeUv X="1.0" Y="1.000" Locked="false" />
+			<Fragment Id="GaugeLabel" />
+			<Vertex Id="GaugeInstancedVert" />
+			<Label X="0.094" Y="0.063" Width="0.183" Height="0.132" TextColor="White" BackColor="DarkGrey" TextScale="0.9" Label="ENGINE" />
+			<Label X="0.352" Y="0.102" Width="0.219" Height="0.104" TextColor="White" BackColor="DarkGrey" TextScale="0.9" Label="THROTTLE" />
+			<Label X="0.698" Y="0.102" Width="0.163" Height="0.104" TextColor="White" BackColor="DarkGrey" TextScale="0.9" Label="DELTAV" />
+			<Label X="0.415" Y="0.535" Width="0.092" Height="0.104" TextColor="White" BackColor="DarkGrey" TextScale="0.9" Label="TWR" />
+			<Label X="0.640" Y="0.535" Width="0.279" Height="0.104" TextColor="White" BackColor="DarkGrey" TextScale="0.9" Label="PROPELLANT" />
+			<Label X="0.792" Y="0.350" Width="0.040" Height="0.124" TextColor="White" BackColor="DarkGrey" TextScale="1" Label="." />
+			<Label X="0.463" Y="0.770" Width="0.040" Height="0.124" TextColor="White" BackColor="DarkGrey" TextScale="1" Label="." />
+		</Component>
+		<Component Name="Buttons">
+			<AnchorUv X="0" Y="0" Locked="false" />
+			<PivotUv X="0" Y="0" Locked="false" />
+			<OffsetUv X="0.037" Y="0.233" Locked="false" />
+			<SizeUv X="0.291" Y="0.667" Locked="false" />
+			<Fragment Id="GaugeButtonFace" />
+			<Vertex Id="GaugeInstancedVert" />
+			<Button X="0" Y="0.0" Width="1" Height="0.5" TextColor="Black" BackColor="DarkGrey" TextScale="0.33" Label="IGNITE" ForeColor="Green">
+				<Tooltip Value="Зажигает двигатели." />
+				<FlightComputer Action="VehicleEngine" Value="MainIgnite"/>
+				<SoundEvent SoundId="LedButtonDown" Action="Pressed" />
+			</Button>
+			<Button X="0" Y="0.5" Width="1" Height="0.5" TextColor="Black" BackColor="DarkGrey" TextScale="0.33" Label="SHUTDN" ForeColor="Red">
+				<Tooltip Value="Выключает двигатели." />
+				<FlightComputer Action="VehicleEngine" Value="MainShutdown"/>
+				<SoundEvent SoundId="LedButtonDown" Action="Pressed" />
+			</Button>
+		</Component>
+		<Component Name="ThrottleDigits">
+			<AnchorUv X="0.0" Y="0.0" />
+			<PivotUv X="0.0" Y="0.0" />
+			<OffsetUv X="0.382" Y="0.243" />
+			<SizeUv X="0.152" Y="0.218" Locked="true" />
+			<Vertex Id="GaugeInstancedVert"/>
+			<Fragment Id="GaugeDigit"/>
+			<Tooltip Value="Текущая настройка тяги двигателя в процентах." />
+			<Digit X="0.0" Y="0.0" Width="0.33" Height="1.0" TextColor="White" BackColor="DarkGrey" TextScale="0.68">
+				<Value Bind="Throttle" Index="0" />
+			</Digit>
+			<Digit X="0.33" Y="0.0" Width="0.33" Height="1.0"  TextColor="White" BackColor="DarkGrey" TextScale="0.68">
+				<Value Bind="Throttle" Index="1" />
+			</Digit>
+			<Digit X="0.66" Y="0.0" Width="0.33" Height="1.0"  TextColor="White" BackColor="DarkGrey" TextScale="0.68">
+				<Value Bind="Throttle" Index="2" />
+			</Digit>
+		</Component>
+		<Component Name="ThrustWeightRatioDigits">
+			<AnchorUv X="0.0" Y="0.0" />
+			<PivotUv X="0.0" Y="0.0" />
+			<OffsetUv X="0.372" Y="0.673" />
+			<SizeUv X="0.172" Y="0.218" Locked="true" />
+			<Vertex Id="GaugeInstancedVert"/>
+			<Fragment Id="GaugeDigit"/>
+			<Tooltip Value="Отношение тяги к весу на данной орбите." />
+			<Digit X="0.000" Y="0.000" Width="0.290" Height="1.000" TextColor="White" BackColor="DarkGrey" TextScale="0.68">
+				<Value Bind="ThrustWeightRatio" Index="0" />
+			</Digit>
+			<Digit X="0.290" Y="0.000" Width="0.290" Height="1.000" TextColor="White" BackColor="DarkGrey" TextScale="0.68">
+				<Value Bind="ThrustWeightRatio" Index="1" />
+			</Digit>
+			<Digit X="0.710" Y="0.000" Width="0.290" Height="1.000" TextColor="White" BackColor="DarkGrey" TextScale="0.68">
+				<Value Bind="ThrustWeightRatio" Index="2" />
+			</Digit>
+		</Component>
+		<Component Name="DeltaVDigits">
+			<AnchorUv X="0" Y="0" Locked="false" />
+			<PivotUv X="0" Y="0" Locked="false" />
+			<OffsetUv X="0.605" Y="0.243" Locked="false" />
+			<SizeUv X="0.35" Y="0.218" Locked="true" />
+			<Vertex Id="GaugeInstancedVert"/>
+			<Fragment Id="GaugeDigit"/>
+			<Digit X="0" Y="0" Width="0.14" Height="1" TextColor="White" BackColor="DarkGrey" TextScale="0.68">
+				<Value Bind="DeltaV" Index="0" />
+			</Digit>
+			<Digit X="0.14" Y="0" Width="0.14" Height="1" TextColor="White" BackColor="DarkGrey" TextScale="0.68">
+				<Value Bind="DeltaV" Index="1" />
+			</Digit>
+			<Digit X="0.28" Y="0" Width="0.14" Height="1" TextColor="White" BackColor="DarkGrey" TextScale="0.68">
+				<Value Bind="DeltaV" Index="2" />
+			</Digit>
+			<Digit X="0.42" Y="0" Width="0.14" Height="1" TextColor="White" BackColor="DarkGrey" TextScale="0.68">
+				<Value Bind="DeltaV" Index="3" />
+			</Digit>
+			<Digit X="0.62" Y="0" Width="0.14" Height="1" TextColor="White" BackColor="DarkGrey" TextScale="0.68">
+				<Value Bind="DeltaV" Index="4" />
+			</Digit>
+			<Digit X="0.76" Y="0" Z="1" W="1" TextColor="DarkGrey" BackColor="White" TextScale="0.68">
+				<DistanceUnit Bind="DeltaV" Index="5" />
+			</Digit>
+		</Component>
+		<Component Name="PropellantDigits">
+			<AnchorUv X="0" Y="0" Locked="false" />
+			<PivotUv X="0" Y="0" Locked="false" />
+			<OffsetUv X="0.615" Y="0.673" Locked="false" />
+			<SizeUv X="0.330" Y="0.218" Locked="true" />
+			<Vertex Id="GaugeInstancedVert"/>
+			<Fragment Id="GaugeDigit"/>
+			<Tooltip Value="Масса ракетного топлива."/>
+			<Digit X="0.0" Y="0.0" Width="0.15" Height="1.0" TextColor="White" BackColor="DarkGrey" TextScale="0.68">
+				<Value Bind="PropellantMass" Index="0" />
+			</Digit>
+			<Digit X="0.15" Y="0.0" Width="0.15" Height="1.0" TextColor="White" BackColor="DarkGrey" TextScale="0.68">
+				<Value Bind="PropellantMass" Index="1" />
+			</Digit>
+			<Digit X="0.30" Y="0.0" Width="0.15" Height="1.0" TextColor="White" BackColor="DarkGrey" TextScale="0.68">
+				<Value Bind="PropellantMass" Index="2" />
+			</Digit>
+			<Digit X="0.45" Y="0.0" Width="0.15" Height="1.0" TextColor="White" BackColor="DarkGrey" TextScale="0.68">
+				<Value Bind="PropellantMass" Index="3" />
+			</Digit>
+			<Digit X="0.60" Y="0.0" Width="0.15" Height="1.0" TextColor="White" BackColor="DarkGrey" TextScale="0.68">
+				<Value Bind="PropellantMass" Index="4" />
+			</Digit>
+			<Digit X="0.75" Y="0.0" Width="0.25" Height="1.0" TextColor="DarkGrey" BackColor="White" TextScale="0.68">
+				<Unit Bind="PropellantMass" Index="5" Type="G" />
+			</Digit>
+		</Component>
+	</GaugeCanvas>
+
+	<GaugeCanvas Id="Telemetry">
+		<AnchorUv X="0" Y="0.35" Locked="true" />
+		<PivotUv X="0" Y="0" Locked="true" />
+		<OffsetUv X="0.01" Y="0" Locked="true" />
+		<SizeUv X="0.115" Y="0.07" Locked="true" />
+		<DisplayName Value="Telemetry" />
+		<Component Name="Back">
+			<AnchorUv X="0" Y="0" Locked="false" />
+			<PivotUv X="0" Y="0" Locked="false" />
+			<OffsetUv X="0" Y="0" Locked="false" />
+			<SizeUv X="1" Y="1" Locked="false" />
+			<Fragment Id="GaugeColor" />
+			<Vertex Id="GaugeInstancedVert" />
+			<Box X="0" Y="0" Z="1" W="1">
+				<Color R="0.07" G="0.07" B="0.07" />
+				<Rounding Value="0.25" />
+			</Box>
+		</Component>
+		<Component Name="Screws">
+			<AnchorUv X="0" Y="0" />
+			<PivotUv X="0" Y="0" />
+			<OffsetUv X="0" Y="0" />
+			<SizeUv X="1.0" Y="1.0" />
+			<Vertex Id="GaugeInstancedVert"/>
+			<Fragment Id="GaugeScrew"/>
+			<Rect X="0.022" Y="0.030" Width="0.050" Height="0.100"/>
+			<Rect X="0.930" Y="0.880" Width="0.050" Height="0.100"/>
+			<Rect X="0.022" Y="0.880" Width="0.050" Height="0.100"/>
+			<Rect X="0.930" Y="0.030" Width="0.050" Height="0.100"/>
+		</Component>
+		<Component Name="Labels">
+			<AnchorUv X="0" Y="0" Locked="false" />
+			<PivotUv X="0" Y="0" Locked="false" />
+			<OffsetUv X="0.0577" Y="0" Locked="false" />
+			<SizeUv X="0.642" Y="1.000" Locked="false" />
+			<Fragment Id="GaugeLabel" />
+			<Vertex Id="GaugeInstancedVert" />
+			<Label X="0.018" Y="0.012" Width="0.958" Height="0.171" TextColor="White" BackColor="DarkGrey" TextScale="0.44" Label="PERIAPSIS" />
+			<Label X="0.018" Y="0.515" Width="0.958" Height="0.171" TextColor="White" BackColor="DarkGrey" TextScale="0.44" Label="APOAPSIS" />
+			<Label X="0.78" Y="0.35" Width="0.1" Height="0.1" TextColor="White" BackColor="DarkGrey" TextScale="1" Label="." />
+			<Label X="0.78" Y="0.83" Width="0.1" Height="0.1" TextColor="White" BackColor="DarkGrey" TextScale="1" Label="." />
+		</Component>
+		<Component Name="PeriapsisDigits">
+			<AnchorUv X="0.5" Y="0" Locked="false" />
+			<PivotUv X="0.5" Y="0.5" Locked="false" />
+			<OffsetUv X="0" Y="0.33" Locked="false" />
+			<SizeUv X="0.7806" Y="0.25" Locked="false" />
+			<Tooltip Value="Высота над уровнем моря." />
+			<Fragment Id="GaugeDigit" />
+			<Vertex Id="GaugeInstancedVert" />
+			<Digit X="0" Y="0" Width="0.12" Height="1" TextColor="White" BackColor="DarkGrey" TextScale="0.68">
+				<Value Bind="Periapsis" Index="0" />
+			</Digit>
+			<Digit X="0.12" Y="0" Width="0.12" Height="1" TextColor="White" BackColor="DarkGrey" TextScale="0.68">
+				<Value Bind="Periapsis" Index="1" />
+			</Digit>
+			<Digit X="0.24" Y="0" Width="0.12" Height="1" TextColor="White" BackColor="DarkGrey" TextScale="0.68">
+				<Value Bind="Periapsis" Index="2" />
+			</Digit>
+			<Digit X="0.36" Y="0" Width="0.12" Height="1" TextColor="White" BackColor="DarkGrey" TextScale="0.68">
+				<Value Bind="Periapsis" Index="3" />
+			</Digit>
+			<Digit X="0.48" Y="0" Width="0.12" Height="1" TextColor="White" BackColor="DarkGrey" TextScale="0.68">
+				<Value Bind="Periapsis" Index="4" />
+			</Digit>
+			<Digit X="0.63" Y="0" Width="0.12" Height="1" TextColor="White" BackColor="DarkGrey" TextScale="0.68">
+				<Value Bind="Periapsis" Index="5" />
+			</Digit>
+			<Digit X="0.75" Y="0" Z="1" W="1" TextColor="DarkGrey" BackColor="White" TextScale="0.68">
+				<DistanceUnit Bind="Periapsis" Index="6" />
+			</Digit>
+		</Component>
+		<Component Name="ApoapsisDigits">
+			<AnchorUv X="0.5" Y="0" Locked="false" />
+			<PivotUv X="0.5" Y="0.5" Locked="false" />
+			<OffsetUv X="0" Y="0.82" Locked="false" />
+			<SizeUv X="0.7806" Y="0.25" Locked="false" />
+			<Tooltip Value="Высота в апогее." />
+			<Fragment Id="GaugeDigit" />
+			<Vertex Id="GaugeInstancedVert" />
+			<Digit X="0" Y="0" Width="0.12" Height="1" TextColor="White" BackColor="DarkGrey" TextScale="0.68">
+				<Value Bind="Apoapsis" Index="0" />
+			</Digit>
+			<Digit X="0.12" Y="0" Width="0.12" Height="1" TextColor="White" BackColor="DarkGrey" TextScale="0.68">
+				<Value Bind="Apoapsis" Index="1" />
+			</Digit>
+			<Digit X="0.24" Y="0" Width="0.12" Height="1" TextColor="White" BackColor="DarkGrey" TextScale="0.68">
+				<Value Bind="Apoapsis" Index="2" />
+			</Digit>
+			<Digit X="0.36" Y="0" Width="0.12" Height="1" TextColor="White" BackColor="DarkGrey" TextScale="0.68">
+				<Value Bind="Apoapsis" Index="3" />
+			</Digit>
+			<Digit X="0.48" Y="0" Width="0.12" Height="1" TextColor="White" BackColor="DarkGrey" TextScale="0.68">
+				<Value Bind="Apoapsis" Index="4" />
+			</Digit>
+			<Digit X="0.63" Y="0" Width="0.12" Height="1" TextColor="White" BackColor="DarkGrey" TextScale="0.68">
+				<Value Bind="Apoapsis" Index="5" />
+			</Digit>
+			<Digit X="0.75" Y="0" Z="1" W="1" TextColor="DarkGrey" BackColor="White" TextScale="0.68">
+				<DistanceUnit Bind="Apoapsis" Index="6" />
+			</Digit>
+		</Component>
+		<Component Name="Buttons">
+			<AnchorUv X="0.5" Y="0.5" Locked="false" />
+			<PivotUv X="0.5" Y="0.5" Locked="false" />
+			<OffsetUv X="0.2727" Y="0" Locked="false" />
+			<SizeUv X="0.1826" Y="1" Locked="false" />
+			<Fragment Id="GaugeButtonFace" />
+			<Vertex Id="GaugeInstancedVert" />
+			<Button X="0" Y="0.02" Width="0.995" Height="0.163" TextColor="Black" BackColor="DarkGrey" TextScale="0.33" Label="WARP" ForeColor="Green">
+				<Tooltip Value="Варп к следующему перегею." />
+				<WarpTo Event="NextPeriapsis" />
+				<SoundEvent SoundId="LedButtonDown" Action="Pressed" />
+			</Button>
+			<Button X="0" Y="0.522" Width="1.012" Height="0.163" TextColor="Black" BackColor="DarkGrey" TextScale="0.33" Label="WARP" ForeColor="Green">
+				<Tooltip Value="Варп к следующему апогею." />
+				<WarpTo Event="NextApoapsis" />
+				<SoundEvent SoundId="LedButtonDown" Action="Pressed" />
+			</Button>
+		</Component>
+	</GaugeCanvas>
+	
+	<GaugeCanvas Id="AutopilotSettings">
+		<DisplayName Value="Autopilot Settings"/>
+		<SizeUv X="0.4047" Y="0.125" Locked="true" />
+		<AnchorUv X="1" Y="1" />
+		<PivotUv X="1" Y="1" />
+		<OffsetUv X="-0.010" Y="-0.01" />
+		<Component Name="Back">
+			<AnchorUv X="0" Y="0" />
+			<PivotUv X="0" Y="0" />
+			<OffsetUv X="0" Y="0" />
+			<SizeUv X="1.0" Y="1.0" />
+			<Vertex Id="GaugeInstancedVert"/>
+			<Fragment Id="GaugeColor"/>
+			<Box X="0" Y="0" Z="1" W="1">
+				<Color R="0.07" G="0.07" B="0.07" />
+				<Rounding Value="0.125"/>
+			</Box>
+		</Component>
+		<Component Name="Screws">
+			<AnchorUv X="0" Y="0" />
+			<PivotUv X="0" Y="0" />
+			<OffsetUv X="0" Y="0" />
+			<SizeUv X="1.0" Y="1.0" />
+			<Vertex Id="GaugeInstancedVert"/>
+			<Fragment Id="GaugeScrew"/>
+			<Rect X="0.011" Y="0.030" Width="0.020" Height="0.052"/>
+			<Rect X="0.970" Y="0.915" Width="0.020" Height="0.052"/>
+			<Rect X="0.011" Y="0.915" Width="0.020" Height="0.052"/>
+			<Rect X="0.970" Y="0.030" Width="0.020" Height="0.052"/>
+		</Component>
+		<Component Name="Labels">
+			<AnchorUv X="0" Y="0" />
+			<PivotUv X="0" Y="0" />
+			<OffsetUv X="0" Y="0" />
+			<SizeUv X="1.0" Y="1.0" />
+			<Vertex Id="GaugeInstancedVert"/>
+			<Fragment Id="GaugeLabel"/>
+			<!-- COLUMN 0 -->
+			<Label X="0.064" Y="0.014" Width="0.1182" Height="0.16" Label="ACTIVATE" TextScale="0.34"/>
+			<Label X="0.064" Y="0.32" Width="0.1182" Height="0.16" Label="SURF" TextScale="0.34"/>
+
+			<!-- COLUMN 1 -->
+			<Label X="0.240" Y="0.014" Width="0.265" Height="0.16" Label="MANUAL THRUST" TextScale="0.34"/>
+			<Label X="0.313" Y="0.32" Width="0.1182" Height="0.16" Label="ORBT" TextScale="0.34"/>
+
+			<!-- COLUMN 2 (0.12 * 3) == 0.36 -->
+			<Label X="0.619" Y="0.014" Width="0.1182" Height="0.16" Label="PROFILE" TextScale="0.34"/>
+			<Label X="0.619" Y="0.32" Width="0.1182" Height="0.16" Label="OVEL" TextScale="0.34"/>
+
+			<!-- COLUMN 3 -->
+			<Label X="0.870" Y="0.014" Width="0.1182" Height="0.16" Label="ROLL" TextScale="0.34"/>
+		</Component>
+		<Component Name="Buttons">
+			<Vertex Id="GaugeInstancedVert"/>
+			<Fragment Id="GaugeButtonFace"/>
+			<AnchorUv X="0" Y="0" />
+			<PivotUv X="0" Y="0" />
+			<OffsetUv X="0" Y="0" />
+			<SizeUv X="1.0" Y="1.0" />
+
+			<!-- COLUMN 0 -->
+			<Button X="0.006" Y="0.16" Width="0.1180" Height="0.16" Label="MANUAL" ForeColor="Yellow" TextColor="Black" TextScale="0.34">
+				<FlightComputer Action="FlightComputerAttitudeMode" Value="Manual"/>
+				<Tooltip Value="Отключить автопилот."/>
+			</Button>
+			<Button X="0.121" Y="0.16" Width="0.1180" Height="0.16" Label="NUL ROT" TextColor="Black" TextScale="0.34">
+				<FlightComputer Action="VehicleReferenceFrame" Value="EclBody"/>
+				<Tooltip Value="Остановите (обнулите) вращение в системе отсчета STAR(ЗВЁЗДА). ПРИМЕЧАНИЕ: РСУ сама по себе не может полностью компенсировать все вращения."/>
+			</Button>
+
+			<!-- SURF -->
+			<Button X="0.006" Y="0.48" Width="0.1180" Height="0.16" Label="FWD" TextColor="Black" TextScale="0.34">
+				<FlightComputer Action="FlightComputerAttitudeTrackTarget" Value="Forward"/>
+				<Tooltip Value="Ориентация «Поверхность вперед». Нос аппарата направлен по вектору скорости относительно поверхности. Ось «вверх» направлена от поверхности."/>
+			</Button>
+			<Button X="0.121" Y="0.48" Width="0.1180" Height="0.16" Label="UP" TextColor="Black" TextScale="0.34">
+				<FlightComputer Action="FlightComputerAttitudeTrackTarget" Value="Up"/>
+				<Tooltip Value="Ориентация «Поверхность вверх». Нос аппарата направлен от поверхности. Ось «вверх» направлена по вектору скорости относительно поверхности."/>
+			</Button>
+			<Button X="0.006" Y="0.64" Width="0.1180" Height="0.16" Label="BACK" TextColor="Black" TextScale="0.34">
+				<FlightComputer Action="FlightComputerAttitudeTrackTarget" Value="Backward"/>
+				<Tooltip Value="Ориентация «Поверхность назад». Нос направлен против вектора скорости относительно поверхности. Ось «вверх» направлена в сторону поверхности."/>
+			</Button>
+			<Button X="0.121" Y="0.64" Width="0.1180" Height="0.16" Label="DOWN" TextColor="Black" TextScale="0.34">
+				<FlightComputer Action="FlightComputerAttitudeTrackTarget" Value="Down"/>
+				<Tooltip Value="Ориентация «Поверхность вниз». Нос направлен к поверхности. Ось «вверх» направлена против вектора скорости относительно поверхности."/>
+
+			</Button>
+			<Button X="0.064" Y="0.8" Width="0.1180" Height="0.16" Label="NUL ROT" TextColor="Black" TextScale="0.34">
+				<FlightComputer Action="VehicleReferenceFrame" Value="EnuBody"/>
+				<Tooltip Value="Остановите (обнулите) вращение в системе отсчета SURF(ПОВЕРХНОСТЬ). ПРИМЕЧАНИЕ: РСУ сама по себе не может полностью компенсировать все вращения."/>
+			</Button>
+
+			<!-- COLUMN 1 -->
+			<Button X="0.255" Y="0.16" Width="0.1180" Height="0.16" Label="DIRECT" TextColor="Black" TextScale="0.34">
+				<FlightComputer Action="FlightComputerManualThrustMode" Value="Direct"/>
+				<Tooltip Value="Используйте максимальную постоянную тягу РСУ для ручного управления."/>
+			</Button>
+			<Button X="0.370" Y="0.16" Width="0.1180" Height="0.16" Label="PULSE" TextColor="Black" TextScale="0.34">
+				<FlightComputer Action="FlightComputerManualThrustMode" Value="Pulse"/>
+				<Tooltip Value="Используйте кратковременные импульсы тяги РСУ для ручного управления."/>
+			</Button>
+
+			<!-- ORBT -->
+			<!-- ROW 0 -->
+			<Button X="0.255" Y="0.48" Width="0.1180" Height="0.16" Label="AHEAD" TextColor="Black" TextScale="0.34">
+				<FlightComputer Action="FlightComputerAttitudeTrackTarget" Value="Ahead"/>
+				<Tooltip Value="Ориентация «Орбитальный горизонт вперед». Нос аппарата направлен на приближающийся орбитальный горизонт(прим. по направлению движения). Ось «вверх» направлена от поверхности."/>
+			</Button>
+			<Button X="0.370" Y="0.48" Width="0.1180" Height="0.16" Label="RAD OUT" TextColor="Black" TextScale="0.34">
+				<FlightComputer Action="FlightComputerAttitudeTrackTarget" Value="RadialOut"/>
+				<Tooltip Value="Ориентация «Радиально наружу». Нос аппарата направлен от поверхности. Ось «вверх» направлена на удаляющийся орбитальный горизонт."/>
+			</Button>
+			<!-- ROW 1 -->
+			<Button X="0.255" Y="0.64" Width="0.1180" Height="0.16" Label="BEHIND" TextColor="Black" TextScale="0.34">
+				<FlightComputer Action="FlightComputerAttitudeTrackTarget" Value="Behind"/>
+				<Tooltip Value="Ориентация «Орбитальный горизонт назад». Нос аппарата направлен на отдаляющийся орбитальный горизонт(прим. против направления движения). Ось «вверх» направлена от поверхности."/>
+			</Button>
+			<Button X="0.370" Y="0.64" Width="0.1180" Height="0.16" Label="RAD IN" TextColor="Black" TextScale="0.34">
+				<FlightComputer Action="FlightComputerAttitudeTrackTarget" Value="RadialIn"/>
+				<Tooltip Value="Ориентация «Радиально внутрь». Нос аппарата направлен к поверхности. Ось «вверх» направлена на приближающийся орбитальный горизонт."/>
+			</Button>
+			<!-- ROW 2 -->
+			<Button X="0.313" Y="0.8" Width="0.1180" Height="0.16" Label="NUL ROT" TextColor="Black" TextScale="0.34">
+				<FlightComputer Action="VehicleReferenceFrame" Value="Lvlh"/>
+				<Tooltip Value="Остановите (обнулите) вращение в системе отсчета ORBT(ОРБИТА). ПРИМЕЧАНИЕ: РСУ сама по себе не может полностью компенсировать все вращения."/>
+			</Button>
+
+			<!-- COLUMN 2 -->
+			<!-- ROW 0 -->
+			<Button X="0.504" Y="0.16" Width="0.1180" Height="0.16" Label="STRICT" TextColor="Black" TextScale="0.34">
+				<FlightComputer Action="FlightComputerAttitudeProfile" Value="Strict"/>
+				<Tooltip Value="Режим строгого контроля ориентации. Высокая скорость, точность и расход топлива."/>
+			</Button>
+			<Button X="0.619" Y="0.16" Width="0.1180" Height="0.16" Label="BALNCE" TextColor="Black" TextScale="0.34">
+				<FlightComputer Action="FlightComputerAttitudeProfile" Value="Balanced"/>
+				<Tooltip Value="Режим сбалансированного контроля ориентации. Средняя скорость, точность и расход топлива."/>
+			</Button>
+			<Button X="0.734" Y="0.16" Width="0.1180" Height="0.16" Label="RELAX" TextColor="Black" TextScale="0.34">
+				<FlightComputer Action="FlightComputerAttitudeProfile" Value="Relaxed"/>
+				<Tooltip Value="Режим щадящего контроля ориентации. Низкая скорость, точность и расход топлива."/>
+			</Button>
+			<!-- ROW 1 -->
+			<Button X="0.504" Y="0.48" Width="0.1180" Height="0.16" Label="PROGDE" TextColor="Black" TextScale="0.34">
+				<FlightComputer Action="FlightComputerAttitudeTrackTarget" Value="Prograde"/>
+				<Tooltip Value="Ориентация «По направлению полёта». Нос аппарата направлен по вектору орбитальной скорости. Ось «вверх» направлена за пределы плоскости орбиты."/>
+			</Button>
+			<Button X="0.619" Y="0.48" Width="0.1180" Height="0.16" Label="NORMAL" TextColor="Black" TextScale="0.34">
+				<FlightComputer Action="FlightComputerAttitudeTrackTarget" Value="Normal"/>
+				<Tooltip Value="Ориентация «Нормаль орбиты». Нос аппарата направлен по вектору углового момента. Ось «вверх» направлена за пределы плоскости орбиты."/>
+			</Button>
+			<Button X="0.734" Y="0.48" Width="0.1180" Height="0.16" Label="OUT" TextColor="Black" TextScale="0.34">
+				<FlightComputer Action="FlightComputerAttitudeTrackTarget" Value="Outward"/>
+				<Tooltip Value="Ориентация «Скорость наружу». Нос аппарата направлен за пределы орбиты. Ось «вверх» направлена против вектора орбитальной скорости."/>
+			</Button>
+			<!-- ROW 2 -->
+			<Button X="0.504" Y="0.64" Width="0.1180" Height="0.16" Label="RETRO" TextColor="Black" TextScale="0.34">
+				<FlightComputer Action="FlightComputerAttitudeTrackTarget" Value="Retrograde"/>
+				<Tooltip Value="Ориентация «Поротив направления полёта». Нос аппарата направлен против вектора орбитальной скорости. Ось «вверх» направлена за пределы плоскости орбиты."/>
+			</Button>
+			<Button X="0.619" Y="0.64" Width="0.1180" Height="0.16" Label="ANTINML" TextColor="Black" TextScale="0.34">
+				<FlightComputer Action="FlightComputerAttitudeTrackTarget" Value="AntiNormal"/>
+				<Tooltip Value="Ориентация «Анти-нормаль орбиты». Нос аппарата направлен против вектора углового момента. Ось «вверх» направлена за пределы плоскости орбиты."/>
+			</Button>
+			<Button X="0.734" Y="0.64" Width="0.1180" Height="0.16" Label="IN" TextColor="Black" TextScale="0.34">
+				<FlightComputer Action="FlightComputerAttitudeTrackTarget" Value="Inward"/>
+				<Tooltip Value="Ориентация «Скорость внутрь». Нос аппарата направлен внутрь орбиты. Ось «вверх» направлена против вектора орбитальной скорости."/>
+			</Button>
+			<!-- ROW 3 -->
+			<Button X="0.619" Y="0.8" Width="0.1180" Height="0.16" Label="NUL ROT" TextColor="Black" TextScale="0.34">
+				<FlightComputer Action="VehicleReferenceFrame" Value="VlfBody"/>
+				<Tooltip Value="Остановите (обнулите) вращение в системе отсчета OVEL(?). ПРИМЕЧАНИЕ: РСУ сама по себе не может полностью компенсировать все вращения."/>
+			</Button>
+
+			<!-- COLUMN 3 -->
+			<Button X="0.868" Y="0.16" Width="0.1180" Height="0.16" Label="ANY" TextColor="Black" TextScale="0.34">
+				<FlightComputer Action="FlightComputerRollMode" Value="Decoupled"/>
+				<Tooltip Value="Обнулить только скорость крена."/>
+			</Button>
+			<!-- ROW 1 -->
+			<Button X="0.868" Y="0.32" Width="0.1180" Height="0.16" Label="NORM" TextColor="Black" TextScale="0.34">
+				<FlightComputer Action="FlightComputerRollMode" Value="Up"/>
+				<Tooltip Value="Направить ось «вверх» на выбранную цель."/>
+			</Button>
+			<!-- ROW 2 -->
+			<Button X="0.868" Y="0.48" Width="0.1180" Height="0.16" Label="INVERT" TextColor="Black" TextScale="0.34">
+				<FlightComputer Action="FlightComputerRollMode" Value="Down"/>
+				<Tooltip Value="Направить ось «вверх» от цели."/>
+			</Button>
+		</Component>
+	</GaugeCanvas>
+	
+	<GaugeCanvas Id="Altitude">
+		<DisplayName Value="Altitude"/>
+		<AnchorUv X="0.5" Y="0.01" />
+		<PivotUv X="0.5" Y="0" />
+		<SizeUv X="0.1" Y="0.016" Locked="true" />
+		<OffsetUv X="0.0" Y="0.01" />
+		<Component Name="Digits">
+			<AnchorUv X="0.5" Y="0.5" />
+			<PivotUv X="0.5" Y="0.5" />
+			<SizeUv X="1" Y="1" Locked="true" />
+			<Vertex Id="GaugeInstancedVert"/>
+			<Fragment Id="GaugeDigit"/>
+			<Tooltip Value="Высота"/>
+			<Digit X="0.0" Y="0.0" Z="0.1" W="1" TextColor="White" BackColor="DarkGrey" TextScale="0.68">
+				<Value Bind="Altitude" Index="0" />
+			</Digit>
+			<Digit X="0.1" Y="0.0" Z="0.2" W="1" TextColor="White" BackColor="DarkGrey" TextScale="0.68">
+				<Value Bind="Altitude" Index="1" />
+			</Digit>
+			<Digit X="0.2" Y="0.0" Z="0.3" W="1" TextColor="White" BackColor="DarkGrey" TextScale="0.68">
+				<Value Bind="Altitude" Index="2" />
+			</Digit>
+			<Digit X="0.3" Y="0.0" Z="0.4" W="1" TextColor="White" BackColor="DarkGrey" TextScale="0.68">
+				<Value Bind="Altitude" Index="3" />
+			</Digit>
+			<Digit X="0.4" Y="0.0" Z="0.5" W="1" TextColor="White" BackColor="DarkGrey" TextScale="0.68">
+				<Value Bind="Altitude" Index="4" />
+			</Digit>
+			<Digit X="0.5" Y="0.0" Z="0.6" W="1" TextColor="White" BackColor="DarkGrey" TextScale="0.68">
+				<Value Bind="Altitude" Index="5" />
+			</Digit>
+			<Digit X="0.6" Y="0.0" Z="0.7" W="1" TextColor="White" BackColor="DarkGrey" TextScale="0.68">
+				<Value Bind="Altitude" Index="6" />
+			</Digit>
+			<Digit X="0.7" Y="0.0" Z="0.8" W="1" TextColor="White" BackColor="DarkGrey" TextScale="0.68">
+				<Value Bind="Altitude" Index="7" />
+			</Digit>
+			<Digit X="0.8" Y="0.0" Z="1.0" W="1" TextColor="DarkGrey" BackColor="White" TextScale="0.68">
+				<DistanceUnit Bind="Altitude" Index="8" />
+			</Digit>
+		</Component>
+	</GaugeCanvas>
+
+    <GaugeCanvas Id="GameTime">
+        <DisplayName Value="Game Time"/>
+        <AnchorUv X="0" Y="0.01" />
+        <PivotUv X="0" Y="0" />
+        <SizeUv X="0.122" Y="0.058" Locked="true" />
+        <OffsetUv X="0.2" Y="0.01" />
+        <Component Name="Back">
+            <AnchorUv X="0" Y="0" />
+            <PivotUv X="0" Y="0" />
+            <OffsetUv X="0" Y="0" />
+            <SizeUv X="1.0" Y="1.0" />
+            <Vertex Id="GaugeInstancedVert"/>
+            <Fragment Id="GaugeColor"/>
+            <Box X="0" Y="0" Z="1" W="1">
+                <Color R="0.07" G="0.07" B="0.07" />
+                <Rounding Value="0.15"/>
+            </Box>
+        </Component>
+        <Component Name="Labels">
+            <AnchorUv X="0" Y="0" />
+            <PivotUv X="0" Y="0" />
+            <OffsetUv X="0" Y="0.01" />
+            <SizeUv X="1" Y="1" />
+            <Fragment Id="GaugeLabel" />
+            <Vertex Id="GaugeInstancedVert" />
+            <Label X="0.0192" Y="0.014" Z="0.275" W="0.16" TextColor="White" BackColor="DarkGrey" TextScale="0.75" Label="YEARS" />
+            <Label X="0.29" Y="0.014" Z="0.47" W="0.16" TextColor="White" BackColor="DarkGrey" TextScale="0.75" Label="DAYS" />
+            <Label X="0.485" Y="0.014" Z="0.62" W="0.16" TextColor="White" BackColor="DarkGrey" TextScale="0.75" Label="HRS" />
+            <Label X="0.635" Y="0.014" Z="0.7955" W="0.16" TextColor="White" BackColor="DarkGrey" TextScale="0.75" Label="MINS" />
+            <Label X="0.81" Y="0.014" Z="0.99" W="0.16" TextColor="White" BackColor="DarkGrey" TextScale="0.75" Label="SECS" />
+            <Label X="0.038" Y="0.5" Z="0.755" W="0.66" TextColor="White" BackColor="DarkGrey" TextScale="0.75" Label="SIM SPEED" />
+            <Label X="0.6" Y="0.8" Z="0.67" W="0.95" TextColor="White" BackColor="DarkGrey" TextScale="1" Label="." />
+        </Component>
+        <Component Name="GameTimeYearsDigits">
+            <AnchorUv X="0.0" Y="0" />
+            <PivotUv X="0.5" Y="0" />
+            <OffsetUv X="0.145" Y="0.2" />
+            <SizeUv X="0.25" Y="0.28" />
+            <Tooltip Value="Прошедшее игровое время." />
+            <Fragment Id="GaugeDigit" />
+            <Vertex Id="GaugeInstancedVert" />
+            <Digit X="0" Y="0" Z="0.25" W="1" TextColor="White" BackColor="DarkGrey" TextScale="0.65">
+                <Value Bind="ElapsedGameTimeYears" Index="0" />
+            </Digit>
+            <Digit X="0.25" Y="0" Z="0.5" W="1" TextColor="White" BackColor="DarkGrey" TextScale="0.65">
+                <Value Bind="ElapsedGameTimeYears" Index="1" />
+            </Digit>
+            <Digit X="0.5" Y="0" Z="0.75" W="1" TextColor="White" BackColor="DarkGrey" TextScale="0.65">
+                <Value Bind="ElapsedGameTimeYears" Index="2" />
+            </Digit>
+            <Digit X="0.75" Y="0" Z="1" W="1" TextColor="White" BackColor="DarkGrey" TextScale="0.65">
+                <Value Bind="ElapsedGameTimeYears" Index="3" />
+            </Digit>
+        </Component>
+        <Component Name="GameTimeDaysDigits">
+            <AnchorUv X="0" Y="0" />
+            <PivotUv X="0.5" Y="0" />
+            <OffsetUv X="0.38" Y="0.2" />
+            <SizeUv X="0.17" Y="0.28" />
+            <Tooltip Value="Прошедшее игровое время." />
+            <Fragment Id="GaugeDigit" />
+            <Vertex Id="GaugeInstancedVert" />
+            <Digit X="0" Y="0" Z="0.33" W="1" TextColor="White" BackColor="DarkGrey" TextScale="0.65">
+                <Value Bind="ElapsedGameTimeDays" Index="0" />
+            </Digit>
+            <Digit X="0.33" Y="0" Z="0.66" W="1" TextColor="White" BackColor="DarkGrey" TextScale="0.65">
+                <Value Bind="ElapsedGameTimeDays" Index="1" />
+            </Digit>
+            <Digit X="0.66" Y="0" Z="0.99" W="1" TextColor="White" BackColor="DarkGrey" TextScale="0.65">
+                <Value Bind="ElapsedGameTimeDays" Index="2" />
+            </Digit>
+        </Component>
+        <Component Name="GameTimeHoursDigits">
+            <AnchorUv X="0.5" Y="0" />
+            <PivotUv X="0.5" Y="0" />
+            <OffsetUv X="0.055" Y="0.2" />
+            <SizeUv X="0.13" Y="0.28" />
+            <Tooltip Value="Прошедшее игровое время." />
+            <Fragment Id="GaugeDigit" />
+            <Vertex Id="GaugeInstancedVert" />
+            <Digit X="0" Y="0" Z="0.5" W="1" TextColor="White" BackColor="DarkGrey" TextScale="0.65">
+                <Value Bind="ElapsedGameTimeHours" Index="0" />
+            </Digit>
+            <Digit X="0.5" Y="0" Z="1" W="1" TextColor="White" BackColor="DarkGrey" TextScale="0.65">
+                <Value Bind="ElapsedGameTimeHours" Index="1" />
+            </Digit>     
+        </Component>
+        <Component Name="GameTimeMinsDigits">
+            <AnchorUv X="0.5" Y="0" />
+            <PivotUv X="0.5" Y="0" />
+            <OffsetUv X="0.21" Y="0.2" />
+            <SizeUv X="0.13" Y="0.28" />
+            <Tooltip Value="Прошедшее игровое время." />
+            <Fragment Id="GaugeDigit" />
+            <Vertex Id="GaugeInstancedVert" />
+            <Digit X="0" Y="0" Z="0.5" W="1" TextColor="White" BackColor="DarkGrey" TextScale="0.65">
+                <Value Bind="ElapsedGameTimeMins" Index="0" />
+            </Digit>
+            <Digit X="0.5" Y="0" Z="1" W="1" TextColor="White" BackColor="DarkGrey" TextScale="0.65">
+                <Value Bind="ElapsedGameTimeMins" Index="1" />
+            </Digit>            
+        </Component>
+        <Component Name="GameTimeSecsDigits">
+            <AnchorUv X="0.5" Y="0" />
+            <PivotUv X="0.5" Y="0" />
+            <OffsetUv X="0.396" Y="0.2" />
+            <SizeUv X="0.13" Y="0.28" />
+            <Tooltip Value="Прошедшее игровое время." />
+            <Fragment Id="GaugeDigit" />
+            <Vertex Id="GaugeInstancedVert" />
+            <Digit X="0" Y="0" Z="0.5" W="1" TextColor="White" BackColor="DarkGrey" TextScale="0.65">
+                <Value Bind="ElapsedGameTimeSecs" Index="0" />
+            </Digit>
+            <Digit X="0.5" Y="0" Z="1" W="1" TextColor="White" BackColor="DarkGrey" TextScale="0.65">
+                <Value Bind="ElapsedGameTimeSecs" Index="1" />
+            </Digit>
+        </Component>
+        <Component Name="GameSpeed">
+            <AnchorUv X="0" Y="0" />
+            <PivotUv X="0.5" Y="0.5" />
+            <OffsetUv X="0.4" Y="0.82" />
+            <SizeUv X="0.7" Y="0.28" />
+            <Tooltip Value="Скорость симуляции." />
+            <Fragment Id="GaugeDigit" />
+            <Vertex Id="GaugeInstancedVert" />
+            <Digit X="0" Y="0" Z="0.09" W="1" TextColor="White" BackColor="DarkGrey" TextScale="0.65">
+                <Value Bind="GameSpeed" Index="0" />
+            </Digit>
+            <Digit X="0.09" Y="0" Z="0.18" W="1" TextColor="White" BackColor="DarkGrey" TextScale="0.65">
+                <Value Bind="GameSpeed" Index="1" />
+            </Digit>
+            <Digit X="0.18" Y="0" Z="0.27" W="1" TextColor="White" BackColor="DarkGrey" TextScale="0.65">
+                <Value Bind="GameSpeed" Index="2" />
+            </Digit>
+            <Digit X="0.27" Y="0" Z="0.36" W="1" TextColor="White" BackColor="DarkGrey" TextScale="0.65">
+                <Value Bind="GameSpeed" Index="3" />
+            </Digit>
+            <Digit X="0.36" Y="0" Z="0.45" W="1" TextColor="White" BackColor="DarkGrey" TextScale="0.65">
+                <Value Bind="GameSpeed" Index="4" />
+            </Digit>
+            <Digit X="0.45" Y="0" Z="0.54" W="1" TextColor="White" BackColor="DarkGrey" TextScale="0.65">
+                <Value Bind="GameSpeed" Index="5" />
+            </Digit>
+            <Digit X="0.54" Y="0" Z="0.63" W="1" TextColor="White" BackColor="DarkGrey" TextScale="0.65">
+                <Value Bind="GameSpeed" Index="6" />
+            </Digit>
+            <Digit X="0.63" Y="0" Z="0.72" W="1" TextColor="White" BackColor="DarkGrey" TextScale="0.65">
+                <Value Bind="GameSpeed" Index="7" />
+            </Digit>
+            <Digit X="0.72" Y="0" Z="0.81" W="1" TextColor="White" BackColor="DarkGrey" TextScale="0.65">
+                <Value Bind="GameSpeed" Index="8" />
+            </Digit>
+            <Digit X="0.86" Y="0" Z="0.95" W="1" TextColor="White" BackColor="DarkGrey" TextScale="0.65">
+                <Value Bind="GameSpeed" Index="9" />
+            </Digit>
+        </Component>
+        <Component Name="Buttons">
+            <AnchorUv X="0" Y="0" />
+            <PivotUv X="0.5" Y="0.5" />
+            <OffsetUv X="0.88" Y="0.75" />
+            <SizeUv X="0.25" Y="0.35" />
+            <Fragment Id="GaugeButtonFace" />
+            <Vertex Id="GaugeInstancedVert" />
+            <Button X="0" Y="0.02" Z="0.995" W="1" TextColor="Black" BackColor="DarkGrey" TextScale="0.25" Label="WARP" ForeColor="Green">
+                <Tooltip Value="Варп к следующей сфере влияния" />
+                <WarpTo Event="NextPatchEvent" />
+                <SoundEvent SoundId="LedButtonDown" Action="Pressed" />
+            </Button>        
+        </Component>
+    </GaugeCanvas>
+	
+	<GaugeCanvas Id="PitchYawRoll">
+		<DisplayName Value="Attitude Indicators"/>
+		<OffsetUv X="0.01" Y="0.01" />
+		<AnchorUv X="0" Y="0.01" />
+		<PivotUv X="0" Y="0" />
+		<SizeUv X="0.09" Y="0.06" Locked="true" />
+		<Component Name="Back">
+			<AnchorUv X="0.5" Y="0.5" />
+			<PivotUv X="0.5" Y="0.5" />
+			<SizeUv X="1" Y="1" Locked="true" />
+			<Vertex Id="GaugeInstancedVert"/>
+			<Fragment Id="GaugeColor"/>
+			<Box X="0" Y="0" Z="1" W="0.48">
+				<Color R="0.07" G="0.07" B="0.07" />
+				<Rounding Value="0.25"/>
+			</Box>
+			<Box X="0" Y="0.52" Z="0.71" W="1">
+				<Color R="0.07" G="0.07" B="0.07" />
+				<Rounding Value="0.25"/>
+			</Box>
+		</Component>
+		<Component Name="Labels">
+			<AnchorUv X="0.5" Y="0.5" />
+			<PivotUv X="0.5" Y="0.5" />
+			<SizeUv X="1" Y="1" Locked="true" />
+			<Vertex Id="GaugeInstancedVert"/>
+			<Fragment Id="GaugeLabel"/>
+			<Label X="0.0" Y="0.0" Z="0.33" W="0.2" Label="PITCH" TextScale="0.5"/>
+			<Label X="0.33" Y="0.0" Z="0.66" W="0.2" Label="YAW" TextScale="0.5"/>
+			<Label X="0.66" Y="0.0" Z="1" W="0.2" Label="ROLL" TextScale="0.5"/>
+			<Label X="0.0" Y="0.5" Z="0.71" W="0.7" Label="SPEED" TextScale="0.5"/>
+			<Label X="0.325" Y="0.770" Z="0.395" W="1.035" Label="." TextScale="0.5"/>
+		</Component>
+		<Component Name="Pitch">
+			<AnchorUv X="0.166" Y="0.325" />
+			<PivotUv X="0.5" Y="0.5" />
+			<SizeUv X="0.27" Y="0.25" Locked="true" />
+			<Vertex Id="GaugeInstancedVert"/>
+			<Fragment Id="GaugeDigit"/>
+			<Tooltip Value="Тангаж"/>
+			<Digit X="0.0" Y="0.0" Z="0.33" W="1" TextColor="White" BackColor="DarkGrey" TextScale="0.68">
+				<Value Bind="Pitch" Index="0" />
+			</Digit>
+			<Digit X="0.333" Y="0.0" Z="0.66" W="1" TextColor="White" BackColor="DarkGrey" TextScale="0.68">
+				<Value Bind="Pitch" Index="1" />
+			</Digit>
+			<Digit X="0.666" Y="0.0" Z="1" W="1" TextColor="White" BackColor="DarkGrey" TextScale="0.68">
+				<Value Bind="Pitch" Index="2" />
+			</Digit>
+		</Component>
+		<Component Name="Yaw">
+			<AnchorUv X="0.495" Y="0.325" />
+			<PivotUv X="0.5" Y="0.5" />
+			<SizeUv X="0.27" Y="0.25" Locked="true" />
+			<Vertex Id="GaugeInstancedVert"/>
+			<Fragment Id="GaugeDigit"/>
+			<Tooltip Value="Рыскание"/>
+			<Digit X="0.0" Y="0.0" Z="0.33" W="1" TextColor="White" BackColor="DarkGrey" TextScale="0.68">
+				<Value Bind="Yaw" Index="0" />
+			</Digit>
+			<Digit X="0.333" Y="0.0" Z="0.66" W="1" TextColor="White" BackColor="DarkGrey" TextScale="0.68">
+				<Value Bind="Yaw" Index="1" />
+			</Digit>
+			<Digit X="0.666" Y="0.0" Z="1" W="1" TextColor="White" BackColor="DarkGrey" TextScale="0.68">
+				<Value Bind="Yaw" Index="2" />
+			</Digit>
+		</Component>
+		<Component Name="Roll">
+			<AnchorUv X="0.834" Y="0.325" />
+			<PivotUv X="0.5" Y="0.5" />
+			<SizeUv X="0.27" Y="0.25" Locked="true" />
+			<Vertex Id="GaugeInstancedVert"/>
+			<Fragment Id="GaugeDigit"/>
+			<Tooltip Value="Крен"/>
+			<Digit X="0.0" Y="0.0" Z="0.33" W="1" TextColor="White" BackColor="DarkGrey" TextScale="0.68">
+				<Value Bind="Roll" Index="0" />
+			</Digit>
+			<Digit X="0.333" Y="0.0" Z="0.66" W="1" TextColor="White" BackColor="DarkGrey" TextScale="0.68">
+				<Value Bind="Roll" Index="1" />
+			</Digit>
+			<Digit X="0.666" Y="0.0" Z="1" W="1" TextColor="White" BackColor="DarkGrey" TextScale="0.68">
+				<Value Bind="Roll" Index="2" />
+			</Digit>
+		</Component>
+		<Component Name="Скорость">
+			<AnchorUv X="0.166" Y="0.84" />
+			<PivotUv X="0.5" Y="0.5" />
+			<OffsetUv X="0.2" Y="0.0" />
+			<SizeUv X="0.65" Y="0.25" Locked="true" />
+			<Vertex Id="GaugeInstancedVert"/>
+			<Fragment Id="GaugeDigit"/>
+			<Tooltip Value="Скорость [/с]"/>
+			<Digit X="0.0" Y="0.0" Z="0.15" W="1" TextColor="White" BackColor="DarkGrey" TextScale="0.68">
+				<Value Bind="Velocity" Index="0" />
+			</Digit>
+			<Digit X="0.15" Y="0.0" Z="0.30" W="1" TextColor="White" BackColor="DarkGrey" TextScale="0.68">
+				<Value Bind="Velocity" Index="1" />
+			</Digit>
+			<Digit X="0.30" Y="0.0" Z="0.45" W="1" TextColor="White" BackColor="DarkGrey" TextScale="0.68">
+				<Value Bind="Velocity" Index="2" />
+			</Digit>
+			<Digit X="0.535" Y="0.0" Z="0.685" W="1" TextColor="White" BackColor="DarkGrey" TextScale="0.68">
+				<Value Bind="Velocity" Index="3" />
+			</Digit>
+			<Digit X="0.69" Y="0.0" Z="0.97" W="1" TextColor="DarkGrey" BackColor="White" TextScale="0.68">
+				<DistanceUnit Bind="Velocity" Index="4" />
+			</Digit>
+		</Component>
+	</GaugeCanvas>
+	
+	<GaugeCanvas Id="Navball">
+		<DisplayName Value="Navball"/>
+		<AnchorUv X="0" Y="1" />
+		<PivotUv X="0" Y="1" />
+		<OffsetUv X="0.01" Y="-0.01" />
+		<SizeUv X="0.15" Y="0.1875" Locked="true" />
+		<Component Name="Ball">
+			<Vertex Id="GaugeVert"/>
+			<Fragment Path="Shaders/GaugeNavball.frag"/>
+			<AnchorUv X="0.5" Y="0.6" />
+			<PivotUv X="0.5" Y="0.5" />
+			<OffsetUv X="0" Y="0.0" />
+			<SizeUv X="1" Y="0.8" Locked="true" />
+		</Component>
+		<Component Name="Back">
+			<AnchorUv X="0.5" Y="0.5" />
+			<PivotUv X="0.5" Y="0.5" />
+			<OffsetUv X="0" Y="0.0" />
+			<SizeUv X="1" Y="1" Locked="true" />
+			<Vertex Id="GaugeInstancedVert"/>
+			<Fragment Id="GaugeColor"/>
+			<Box X="0" Y="0.558" Z="0.272" W="0.643">
+				<Color R="0.07" G="0.07" B="0.07" />
+			</Box>
+			<Box X="0.728" Y="0.558" Z="1" W="0.643">
+				<Color R="0.07" G="0.07" B="0.07" />
+			</Box>
+			<Box X="0.364" Y="0.918" Z="0.636" W="1.0">
+				<Color R="0.07" G="0.07" B="0.07" />
+			</Box>
+		</Component>
+		<Component Name="Buttons">
+			<Vertex Id="GaugeInstancedVert"/>
+			<Fragment Id="GaugeButtonFace"/>
+			<AnchorUv X="0.5" Y="0.180" />
+			<PivotUv X="0.5" Y="0.5" />
+			<OffsetUv X="0" Y="0" />
+			<SizeUv X="1" Y="0.10" Locked="true" />
+			<Button X="0.0" Y="0.0" Z="0.2" W="1" Label="STAR" TextColor="Black" TextScale="0.33">
+				<NavBallMode Mode="EclBody" />
+				<SoundEvent Action="Pressed" SoundId="LedButtonDown"/>
+				<Tooltip Value="Система отсчета, связанная с далекими звездами."/>
+			</Button>
+			<Button X="0.2" Y="0.0" Z="0.4" W="1" Label="SURF" TextColor="Black" TextScale="0.33">
+				<NavBallMode Mode="EnuBody" />
+				<SoundEvent Action="Pressed" SoundId="LedButtonDown"/>
+				<Tooltip Value="Система отсчета, связанная с поверхностью планеты."/>
+			</Button>
+			<Button X="0.4" Y="0.0" Z="0.6" W="1" Label="ORBT" TextColor="Black" TextScale="0.33">
+				<NavBallMode Mode="Lvlh" />
+				<SoundEvent Action="Pressed" SoundId="LedButtonDown"/>
+				<Tooltip Value="Система отсчета, связанная с орбитальным горизонтом."/>
+			</Button>
+			<Button X="0.6" Y="0.0" Z="0.8" W="1" Label="OVEL" TextColor="Black" TextScale="0.33">
+				<NavBallMode Mode="VlfBody" />
+				<SoundEvent Action="Pressed" SoundId="LedButtonDown"/>
+				<Tooltip Value="Система отсчета, связанная с орбитальной скоростью вашего аппарата."/>
+			</Button>
+			<Button X="0.8" Y="0.0" Z="1.0" W="1" Label="TGT" TextColor="Black" TextScale="0.33">
+				<NavBallMode Mode="Tgt" />
+				<SoundEvent Action="Pressed" SoundId="LedButtonDown"/>
+				<Tooltip Value="Система отсчета, связанная с направлением на текущую цель."/>
+			</Button>
+			
+		</Component>
+		<Component Name="Buttons2">
+		<Vertex Id="GaugeInstancedVert"/>
+		<Fragment Id="GaugeButtonFace"/>
+		<AnchorUv X="0.5" Y="0.280" />
+		<PivotUv X="0.5" Y="0.5" />
+		<OffsetUv X="0" Y="0" />
+		<SizeUv X="1" Y="0.10" Locked="true" />
+			<Button X="0.8" Y="0.0" Z="1.0" W="1" Label="BURN" TextColor="Black" TextScale="0.33">
+				<NavBallMode Mode="BurnBody" />
+				<SoundEvent Action="Pressed" SoundId="LedButtonDown"/>
+				<Tooltip Value="Система отсчета, связанная с направлением следующего запланированного манёвра."/>
+			</Button>
+		</Component>
+		<Component Name="PitchRate">
+			<AnchorUv X="0" Y="0.6" />
+			<PivotUv X="0" Y="0.5" />
+			<SizeUv X="0.270" Y="0.08" Locked="true" />
+			<Tooltip Value="Скорость тангажа"/>
+			<Vertex Id="GaugeInstancedVert"/>
+			<Fragment Id="GaugeDigit"/>
+			<Digit X="0.0" Y="0.0" Z="0.19" W="1" TextColor="White" BackColor="DarkGrey" TextScale="0.68">
+				<Sign Bind="PitchVel" />
+			</Digit>
+			<Digit X="0.19" Y="0.0" Z="0.38" W="1" TextColor="White" BackColor="DarkGrey" TextScale="0.68">
+				<Value Bind="PitchVel" Index="0" />
+			</Digit>
+			<Digit X="0.38" Y="0.0" Z="0.570" W="1" TextColor="White" BackColor="DarkGrey" TextScale="0.68">
+				<Value Bind="PitchVel" Index="1" />
+			</Digit>
+			<Digit X="0.620" Y="0.0" Z="0.810" W="1" TextColor="White" BackColor="DarkGrey" TextScale="0.68">
+				<Value Bind="PitchVel" Index="2" />
+			</Digit>
+			<Digit X="0.810" Y="0.0" Z="1" W="1" TextColor="White" BackColor="DarkGrey" TextScale="0.68">
+				<Value Bind="PitchVel" Index="3" />
+			</Digit>
+		</Component>
+		<Component Name="RollRate">
+			<AnchorUv X="1" Y="0.6" />
+			<PivotUv X="1" Y="0.5" />
+			<OffsetUv X="-0.005" Y="0.0" />
+			<SizeUv X="0.270" Y="0.08" Locked="true" />
+			<Vertex Id="GaugeInstancedVert"/>
+			<Fragment Id="GaugeDigit"/>
+			<Tooltip Value="Скорость крена"/>
+			<Digit X="0.0" Y="0.0" Z="0.19" W="1" TextColor="White" BackColor="DarkGrey" TextScale="0.68">
+				<Sign Bind="RollVel" />
+			</Digit>
+			<Digit X="0.19" Y="0.0" Z="0.38" W="1" TextColor="White" BackColor="DarkGrey" TextScale="0.68">
+				<Value Bind="RollVel" Index="0" />
+			</Digit>
+			<Digit X="0.38" Y="0.0" Z="0.570" W="1" TextColor="White" BackColor="DarkGrey" TextScale="0.68">
+				<Value Bind="RollVel" Index="1" />
+			</Digit>
+			<Digit X="0.620" Y="0.0" Z="0.810" W="1" TextColor="White" BackColor="DarkGrey" TextScale="0.68">
+				<Value Bind="RollVel" Index="2" />
+			</Digit>
+			<Digit X="0.810" Y="0.0" Z="1" W="1" TextColor="White" BackColor="DarkGrey" TextScale="0.68">
+				<Value Bind="RollVel" Index="3" />
+			</Digit>
+		</Component>
+		<Component Name="YawRate">
+			<AnchorUv X="0.5" Y="1" />
+			<PivotUv X="0.5" Y="1" />
+			<SizeUv X="0.270" Y="0.08" Locked="true" />
+			<Vertex Id="GaugeInstancedVert"/>
+			<Fragment Id="GaugeDigit"/>
+			<Tooltip Value="Скорость рыскания"/>
+			<Digit X="0.0" Y="0.0" Z="0.19" W="1" TextColor="White" BackColor="DarkGrey" TextScale="0.68">
+				<Sign Bind="YawVel" />
+			</Digit>
+			<Digit X="0.19" Y="0.0" Z="0.38" W="1" TextColor="White" BackColor="DarkGrey" TextScale="0.68">
+				<Value Bind="YawVel" Index="0" />
+			</Digit>
+			<Digit X="0.38" Y="0.0" Z="0.570" W="1" TextColor="White" BackColor="DarkGrey" TextScale="0.68">
+				<Value Bind="YawVel" Index="1" />
+			</Digit>
+			<Digit X="0.620" Y="0.0" Z="0.810" W="1" TextColor="White" BackColor="DarkGrey" TextScale="0.68">
+				<Value Bind="YawVel" Index="2" />
+			</Digit>
+			<Digit X="0.810" Y="0.0" Z="1" W="1" TextColor="White" BackColor="DarkGrey" TextScale="0.68">
+				<Value Bind="YawVel" Index="3" />
+			</Digit>
+		</Component>
+		<Component Name="Labels">
+			<AnchorUv X="0.5" Y="0.5" />
+			<PivotUv X="0.5" Y="0.5" />
+			<SizeUv X="1" Y="1" Locked="true" />
+			<Vertex Id="GaugeInstancedVert"/>
+			<Fragment Id="GaugeLabel"/>
+			<Label X="0.152" Y="0.590" Z="0.168" W="0.650" Label="." TextScale="0.5"/>
+			<Label X="0.876" Y="0.590" Z="0.893" W="0.650" Label="." TextScale="0.5"/>
+			<Label X="0.518" Y="0.950" Z="0.534" W="1.010" Label="." TextScale="0.5"/>
+		</Component>
+		
+	</GaugeCanvas>
+
+</Assets>
