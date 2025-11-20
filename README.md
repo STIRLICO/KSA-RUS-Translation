@@ -5,3 +5,7 @@
 
 Чтобы установить данный перевод замените файл Gauges.xml 
 По данному пути "\AppData\Local\Programs\Kitten Space Agency\Content\Core"
+
+
+
+Special thanks: @Aperture and @AleG for this method
