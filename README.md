@@ -8,11 +8,11 @@
 
 Если по этому пути ничего нет то нажмите windows найдите там Kitten Space Agency и кликните ПКМ
 
-[Шаг 1](https://i.imgur.com/i9RbDZi.png)
+![Шаг 1](https://i.imgur.com/i9RbDZi.png)
 
 Дальше кикните по ярлыку Kitten Space Agency в папке и нажмите расположение файла
 
-[Шаг 2](https://i.imgur.com/g3ejfnZ.png)
+![Шаг 2](https://i.imgur.com/g3ejfnZ.png)
 
 Готово, вы в папке с игрой!
 
