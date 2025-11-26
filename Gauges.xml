@@ -1,4 +1,4 @@
-﻿<Assets>
+<Assets>
 
 	<Shader Id="GaugeInstancedVert" Path="Shaders/GaugeInstanced.vert"/>
 	<Shader Id="GaugeVert" Path="Shaders/Gauge.vert"/>
@@ -1129,7 +1129,7 @@
 				<Value Bind="Roll" Index="2" />
 			</Digit>
 		</Component>
-		<Component Name="Скорость">
+		<Component Name="Speed">
 			<AnchorUv X="0.166" Y="0.84" />
 			<PivotUv X="0.5" Y="0.5" />
 			<OffsetUv X="0.2" Y="0.0" />
